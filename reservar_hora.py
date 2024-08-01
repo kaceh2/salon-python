@@ -5,7 +5,7 @@ import os
 from dotenv import find_dotenv, load_dotenv
 import re
 
-def conectarDatabase() :
+def conectarDatabase() : #se crea la función de conexión
 
     dotenv_path = find_dotenv()
     load_dotenv(dotenv_path)
@@ -43,7 +43,7 @@ def main() :
             print(f"{service[0]}) {service[1]}")
         print("\nEnter number of service you want : ")
         serviceIdSelected = input()
-        if (re.search("^[1-5]+$",serviceIdSelected) == None) :
+        if (re.search("^[1-5]+$",serviceIdSelected) == None) : #verificación de ingreso de valores de 1 a 5
             print("\nI could not find that service. What would you like today? : ")
         else : 
             aux = False
@@ -52,14 +52,14 @@ def main() :
     print("\nWhat is your phone number? (8-digit) : ")
     while (aux == True) :
         customerPhone = str(input()) #conversion a string por si necesitaba guiones en el numero
-        if (re.search("^[0-9]{8}$",customerPhone) == None) :
+        if (re.search("^[0-9]{8}$",customerPhone) == None) : #verificación de ingreso de numero de 8 digitos
             print("\nIncorrect number format, make sure you enter an 8-digit number : ")
         else : 
             aux = False
 
     cur.execute(f"""SELECT customer_id FROM customers WHERE phone = '{customerPhone}'""")
     aux = True
-    if (cur.fetchall() == []) :
+    if (cur.fetchall() == []) : #si no se encuentra un id asociado a el numero de telefono entregado, se pide el nombre para ingresarlo
         print("\nI don't have a record for that phone number, what's your name? : ")
         while (aux == True) :
             customerName = input()
